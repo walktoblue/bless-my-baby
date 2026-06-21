@@ -6,6 +6,33 @@ import { TabNav } from '@/components/tab-nav'
 
 const MAX_PHOTOS = 3
 
+// Compress image client-side before upload (phones shoot 5-15MB; resize to ≤1400px JPEG)
+async function compressPhoto(file: File): Promise<File> {
+  const MAX_DIM = 1400
+  const QUALITY = 0.85
+  return new Promise(resolve => {
+    const img = new window.Image()
+    const url = URL.createObjectURL(file)
+    img.onload = () => {
+      let w = img.naturalWidth
+      let h = img.naturalHeight
+      if (w > MAX_DIM || h > MAX_DIM) {
+        if (w > h) { h = Math.round(h * MAX_DIM / w); w = MAX_DIM }
+        else { w = Math.round(w * MAX_DIM / h); h = MAX_DIM }
+      }
+      const canvas = document.createElement('canvas')
+      canvas.width = w; canvas.height = h
+      canvas.getContext('2d')!.drawImage(img, 0, 0, w, h)
+      URL.revokeObjectURL(url)
+      canvas.toBlob(blob => {
+        resolve(new File([blob!], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }))
+      }, 'image/jpeg', QUALITY)
+    }
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file) }
+    img.src = url
+  })
+}
+
 export default function HomePage() {
   const router = useRouter()
   const fileRef = useRef<HTMLInputElement>(null)
@@ -44,17 +71,26 @@ export default function HomePage() {
 
     setLoading(true)
     try {
+      // Compress images before upload to stay within Vercel's 4.5MB body limit
+      const compressed = await Promise.all(photos.map(compressPhoto))
+
       const fd = new FormData()
-      photos.forEach(f => fd.append('photos', f))
+      compressed.forEach(f => fd.append('photos', f))
       fd.append('age', age)
       fd.append('topText', topText)
       fd.append('date', date)
       fd.append('name', name)
 
       const res = await fetch('/api/generate', { method: 'POST', body: fd })
-      const json = await res.json()
+      let json: { error?: string; url?: string }
+      try {
+        json = await res.json()
+      } catch {
+        if (res.status === 413) throw new Error('사진 파일이 너무 커요. 더 작은 사진을 사용해 주세요.')
+        throw new Error(`서버 오류 (${res.status})`)
+      }
       if (!res.ok) throw new Error(json.error || '오류가 발생했어요.')
-      router.push(`/result?url=${encodeURIComponent(json.url)}&name=${encodeURIComponent(name)}`)
+      router.push(`/result?url=${encodeURIComponent(json.url!)}&name=${encodeURIComponent(name)}`)
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : '오류가 발생했어요.')
       setLoading(false)
