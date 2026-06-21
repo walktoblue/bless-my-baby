@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bless My Baby - 완성된 브로마이드</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#0053db",
+                        "inverse-on-surface": "#f1effa",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f4f2fd",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e1dfde",
+                        "surface-variant": "#e3e1ec",
+                        "error": "#ba1a1a",
+                        "tertiary": "#943700",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-tertiary-container": "#ffede6",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "outline": "#737686",
+                        "on-secondary-container": "#636262",
+                        "on-surface": "#1a1b22",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#1b1c1b",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface": "#fbf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eeedf7",
+                        "inverse-surface": "#2f3038",
+                        "tertiary-container": "#bc4800",
+                        "secondary": "#5e5e5e",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface-variant": "#434655",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e3e1ec",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-background": "#1a1b22",
+                        "on-secondary-fixed-variant": "#464746",
+                        "primary-fixed": "#dbe1ff",
+                        "primary": "#004ac6",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e7f1",
+                        "surface-dim": "#dad9e3",
+                        "secondary-fixed-dim": "#c7c6c5",
+                        "secondary-fixed": "#e4e2e1",
+                        "background": "#fbf8ff",
+                        "primary-container": "#2563eb",
+                        "surface-bright": "#fbf8ff",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7d2d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "lg": "40px",
+                        "margin-mobile": "16px",
+                        "max-width": "1200px",
+                        "margin-desktop": "auto",
+                        "xs": "8px",
+                        "sm": "16px",
+                        "base": "4px",
+                        "md": "24px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .bromide-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            aspect-ratio: 1 / 1.414; /* A3 Proportion */
+        }
+        .annotation-dot {
+            width: 6px;
+            height: 6px;
+            background: #2563EB;
+            border-radius: 50%;
+            position: relative;
+        }
+        @media (min-width: 768px) {
+            .annotation-dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
+        .annotation-label {
+            position: absolute;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 8px;
+            line-height: 1;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            gap: 2px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        @media (min-width: 768px) {
+            .annotation-label {
+                padding: 2px 8px;
+                font-size: 10px;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- Top AppBar -->
+<header class="bg-surface dark:bg-surface-dim shadow-[0_4px_20px_rgba(0,0,0,0.04)] fixed full-width top-0 z-50 w-full h-16 flex items-center">
+<div class="flex justify-between items-center px-margin-mobile md:px-lg w-full max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer active:opacity-80">
+                Bless My Baby
+            </div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary transition-colors" data-icon="help">help</span>
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary transition-colors" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center pt-xl pb-24 px-margin-mobile">
+<div class="max-w-[800px] w-full text-center mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs md:mb-sm">완성된 브로마이드</h1>
+<p class="text-secondary font-body-md mb-md md:mb-lg text-sm md:text-base">세상에 단 하나뿐인 우리 아이의 특별한 기록이 완성되었어요.</p>
+<!-- Bromide Preview Card -->
+<div class="relative mx-auto w-full max-w-[450px] bromide-container rounded-lg p-sm md:p-lg border border-outline-variant overflow-hidden group">
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png')"></div>
+<div class="relative w-full h-full flex flex-col items-center justify-between py-xs md:py-sm">
+<!-- Top Text Placeholder -->
+<div class="text-center mb-xs md:mb-md">
+<p class="font-headline-md text-primary opacity-40 select-none text-sm md:text-headline-md">[상단 문구]</p>
+</div>
+<!-- Bromide Image with Annotations -->
+<div class="relative w-[85%] aspect-[3/4] mx-auto">
+<img alt="Baby Bromide Preview" class="w-full h-full object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHgz0i2ORink8_LMiyiSLz2SeUdOkwJoc3b9_3ojH12oxRCKWH0oB5avCCbW5aukXkL0OT2p0XuBprrAaDhY6IISDGmkPJK62htlijoomZ_p20gLcwULpeipkzRncSVOB90_TjCsvAzyw1sMHBfiF-KOQeVA-F8TnR3oOWkDB733c09VrSfdbEIhGVb6HJC8jWEnfW1rjZz2T1wUnCOgDhxkUdmDosujd42n49Y4CCeH9fQHyiI3-1eKG0H3ITlJbFi5rX-Bcd97db"/>
+<!-- Annotations -->
+<div class="absolute top-[5%] left-[50%] -translate-x-1/2">
+<div class="annotation-dot"></div>
+<div class="annotation-label left-2 md:left-4 top-0"><span>머리</span><span class="text-secondary opacity-60">head</span></div>
+</div>
+<div class="absolute top-[18%] left-[42%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label right-2 md:right-4 top-0"><span>눈</span><span class="text-secondary opacity-60">eye</span></div>
+</div>
+<div class="absolute top-[25%] left-[50%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label left-2 md:left-4 top-0"><span>코</span><span class="text-secondary opacity-60">nose</span></div>
+</div>
+<div class="absolute top-[32%] left-[48%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label right-2 md:right-4 top-0"><span>입</span><span class="text-secondary opacity-60">mouth</span></div>
+</div>
+<div class="absolute top-[40%] left-[30%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label right-2 md:right-4 top-0"><span>어깨</span><span class="text-secondary opacity-60">shoulder</span></div>
+</div>
+<div class="absolute top-[48%] left-[45%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label left-2 md:left-4 top-0"><span>가슴</span><span class="text-secondary opacity-60">chest</span></div>
+</div>
+<div class="absolute top-[55%] left-[20%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label right-2 md:right-4 top-0"><span>팔</span><span class="text-secondary opacity-60">arm</span></div>
+</div>
+<div class="absolute top-[60%] left-[15%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label right-2 md:right-4 top-0"><span>손</span><span class="text-secondary opacity-60">hand</span></div>
+</div>
+<div class="absolute top-[65%] left-[55%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label left-2 md:left-4 top-0"><span>배</span><span class="text-secondary opacity-60">tummy</span></div>
+</div>
+<div class="absolute top-[80%] left-[40%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label right-2 md:right-4 top-0"><span>다리</span><span class="text-secondary opacity-60">leg</span></div>
+</div>
+<div class="absolute top-[88%] left-[35%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label right-2 md:right-4 top-0"><span>무릎</span><span class="text-secondary opacity-60">knee</span></div>
+</div>
+<div class="absolute top-[95%] left-[60%]">
+<div class="annotation-dot"></div>
+<div class="annotation-label left-2 md:left-4 top-0"><span>발</span><span class="text-secondary opacity-60">foot</span></div>
+</div>
+</div>
+<!-- Bottom Date & Name Placeholder -->
+<div class="mt-xs md:mt-md text-center flex flex-col gap-0 md:gap-xs">
+<p class="font-label-md text-secondary text-xs md:text-sm">[날짜 (생일)]</p>
+<p class="font-headline-md text-on-surface text-base md:text-headline-md">[이름]</p>
+</div></div>
+</div>
+<!-- Action Area -->
+<div class="mt-md md:mt-xl flex flex-col md:grid md:grid-cols-2 gap-md items-stretch">
+<!-- Download Button -->
+<button class="w-full bg-primary-container text-on-primary-container h-12 md:h-14 rounded-xl font-label-md flex items-center justify-center gap-xs hover:shadow-lg active:scale-[0.98] transition-all order-1">
+<span class="material-symbols-outlined text-xl" data-icon="download">download</span>
+                    다운로드 (A3 고화질)
+                </button>
+<!-- Email Area -->
+<div class="flex flex-col gap-base order-2">
+<div class="flex flex-col sm:flex-row gap-xs">
+<input class="flex-grow h-12 md:h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-body-md" placeholder="이메일 주소 입력" type="email"/>
+<button class="whitespace-nowrap px-md h-12 md:h-14 bg-white border border-outline text-secondary rounded-xl font-label-md hover:bg-surface-container-low transition-colors active:scale-[0.98]">
+                            이메일로 받기
+                        </button>
+</div>
+<p class="text-left text-label-sm text-on-surface-variant px-xs opacity-70">다운로드와 이메일을 동시에 받을 수 있어요</p>
+</div>
+</div>
+<!-- Footer Link -->
+<div class="mt-lg md:mt-xl">
+<a class="text-secondary hover:text-primary font-label-md flex items-center justify-center gap-base transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform" data-icon="arrow_back">arrow_back</span>
+                    다시 만들기
+                </a>
+</div>
+</div>
+</main>
+<!-- Footer (Desktop Only) -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant hidden md:block w-full">
+<div class="flex flex-col md:flex-row justify-between items-center px-lg py-xl max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md text-primary mb-md md:mb-0">Bless My Baby</div>
+<div class="text-secondary dark:text-secondary-fixed font-label-sm text-center md:text-left mb-md md:mb-0">
+                © 2024 Bless My Baby. Nurturing memories forever.
+            </div>
+<div class="flex gap-md">
+<a class="text-secondary hover:text-primary font-label-sm transition-colors cursor-pointer" href="#">Terms of Service</a>
+<a class="text-secondary hover:text-primary font-label-sm transition-colors cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-secondary hover:text-primary font-label-sm transition-colors cursor-pointer" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center py-2 px-margin-mobile bg-surface-container-lowest/90 backdrop-blur-md dark:bg-surface-container-low/90 border-t border-outline-variant shadow-[0_-4px_20px_rgba(0,0,0,0.04)] md:hidden">
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed active:scale-95 duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-label-sm text-label-sm">Create</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-bold active:scale-95 duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="photo_library" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+<span class="font-label-sm text-label-sm">Result</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed active:scale-95 duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+<script>
+        // Subtle entrance animations for annotations
+        document.addEventListener('DOMContentLoaded', () => {
+            const labels = document.querySelectorAll('.annotation-label');
+            labels.forEach((label, index) => {
+                label.style.opacity = '0';
+                label.style.transform = 'translateY(-50%) scale(0.9)';
+                setTimeout(() => {
+                    label.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    label.style.opacity = '1';
+                    label.style.transform = 'translateY(-50%) scale(1)';
+                }, 800 + (index * 100));
+            });
+        });
+    </script>
+</body></html>
