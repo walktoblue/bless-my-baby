@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import sharp from 'sharp'
 import { v4 as uuidv4 } from 'uuid'
-import { getSupabaseAdmin } from '@/lib/supabase'
 import { buildSvg, FACE, W, H } from '@/lib/template'
 
 export const maxDuration = 60
@@ -77,20 +76,31 @@ export async function POST(req: NextRequest) {
       .png({ compressionLevel: 6 })
       .toBuffer()
 
-    // Upload to Supabase Storage
+    // Upload to Supabase Storage via direct REST API (avoids SDK buffer issues)
     const filename = `${uuidv4()}.png`
-    const { error: uploadErr } = await getSupabaseAdmin().storage
-      .from('bromides')
-      .upload(filename, result, { contentType: 'image/png', upsert: false })
+    const supabaseUrl = process.env.SUPABASE_URL!
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
-    if (uploadErr) {
-      console.error('Supabase upload error:', uploadErr)
+    const uploadRes = await fetch(
+      `${supabaseUrl}/storage/v1/object/bromides/${filename}`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${serviceKey}`,
+          'apikey': serviceKey,
+          'Content-Type': 'image/png',
+        },
+        body: new Uint8Array(result),
+      }
+    )
+
+    if (!uploadRes.ok) {
+      const errText = await uploadRes.text()
+      console.error('Supabase upload error:', uploadRes.status, errText)
       return NextResponse.json({ error: '이미지 저장에 실패했어요.' }, { status: 500 })
     }
 
-    const { data: { publicUrl } } = getSupabaseAdmin().storage
-      .from('bromides')
-      .getPublicUrl(filename)
+    const publicUrl = `${supabaseUrl}/storage/v1/object/public/bromides/${filename}`
 
     return NextResponse.json({ url: publicUrl, filename })
   } catch (err) {
