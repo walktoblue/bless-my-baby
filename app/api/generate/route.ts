@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import sharp from 'sharp'
 import { v4 as uuidv4 } from 'uuid'
-import { supabaseAdmin } from '@/lib/supabase'
+import { getSupabaseAdmin } from '@/lib/supabase'
 import { buildSvg, FACE, W, H } from '@/lib/template'
 
 export const maxDuration = 60
@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
 
     // Upload to Supabase Storage
     const filename = `${uuidv4()}.png`
-    const { error: uploadErr } = await supabaseAdmin.storage
+    const { error: uploadErr } = await getSupabaseAdmin().storage
       .from('bromides')
       .upload(filename, result, { contentType: 'image/png', upsert: false })
 
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: '이미지 저장에 실패했어요.' }, { status: 500 })
     }
 
-    const { data: { publicUrl } } = supabaseAdmin.storage
+    const { data: { publicUrl } } = getSupabaseAdmin().storage
       .from('bromides')
       .getPublicUrl(filename)
 
