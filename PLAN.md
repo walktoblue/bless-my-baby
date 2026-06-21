@@ -80,7 +80,7 @@ Next.js (App Router, TypeScript) · Tailwind CSS · shadcn/ui · Supabase Storag
 - [x] 기획 완료
 - [x] Stitch 프로토타입
 - [x] 연결 (GitHub · Vercel · Supabase)
-- [ ] 구현: 입력 화면
-- [ ] 구현: 결과 화면 (미리보기 + 다운로드 + 이메일)
-- [ ] 구현: 이미지 합성 API (얼굴 추출 + 템플릿 합성 + 고해상도 저장)
-- [ ] 배포 확인
+- [x] 구현: 입력 화면
+- [x] 구현: 결과 화면 (미리보기 + 다운로드 + 이메일)
+- [x] 구현: 이미지 합성 API (얼굴 추출 + 템플릿 합성 + 고해상도 저장)
+- [x] 배포 확인
