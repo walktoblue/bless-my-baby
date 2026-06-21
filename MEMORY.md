@@ -34,3 +34,29 @@ Resend API 사용 (무료 tier: 월 3,000통). 다운로드와 이메일 동시 
 - AI face swap (Replicate): 비용 발생 → Canvas 합성으로 대체
 - 키/몸무게 기록: 사용자가 불필요하다고 판단, 제외
 - DB 테이블: 이미지만 임시 저장하므로 Supabase Storage만으로 충분
+
+## 연결 (2026-06-21)
+
+**스택·배포 연결 순서**
+1. Stitch zip → design/ 폴더 정리 (mobile_1=결과화면, mobile_2=입력화면)
+2. npx create-next-app@latest (TypeScript·Tailwind·App Router)
+3. shadcn/ui init + button·card·input·label·select·textarea·table·badge 설치
+4. globals.css: PLAN.md 디자인 토큰 → oklch 변환 후 :root 변수에 적용
+5. layout.tsx: Noto Sans KR 폰트 설정 (Geist 대체)
+6. git init → gh repo create bless-my-baby --public --push
+7. vercel link → GitHub 자동 연결됨 (이미 기존 프로젝트에서 Vercel GitHub App 설치돼 있어서 바로 성공)
+8. Supabase: vercel integration add 실패 ("Cannot install more than one integration at a time") → 기존 handong-donor-wall 프로젝트와 같은 Supabase 프로젝트(zbxnadgqarloklefhrph) 공유하기로 결정. bless-my-baby는 Storage 버킷(bromides)만 쓰고 테이블 없어서 충돌 없음
+9. .env.local에 Supabase URL/anon key/service role key 설정
+10. Vercel env vars 등록 (production·preview·development 3개 환경)
+11. lib/supabase.ts 생성 (anon 클라이언트 + service role admin 클라이언트 분리)
+
+**막힌 설정과 해결**
+- **shadcn init 멈춤**: `--yes` 플래그로 실행했을 때 "Installing dependencies." 단계에서 수 분간 응답 없음. 이 단계는 npm 패키지 네트워크 다운로드 시간이므로 기다리면 완료됨 (실제로 2-3분 후 정상 완료).
+- **Supabase 인테그레이션 중복 오류**: Vercel CLI `vercel integration add supabase` → "Cannot install more than one integration at a time" 오류. 기존 handong-donor-wall 프로젝트의 Supabase 통합이 이미 팀 계정에 활성화돼 있어서 발생. 해결: 기존 Supabase 프로젝트 자격증명을 그대로 재사용. 두 앱이 같은 DB 프로젝트를 쓰지만 서로 다른 테이블/버킷을 쓰므로 충돌 없음.
+- **git commit 이메일 없음**: 새 디렉토리라 git user.email 미설정 → `git config user.email kim.shingyun@gmail.com` 로컬 설정 후 해결.
+- **CLAUDE.md 덮어쓰기**: create-next-app이 AGENTS.md를 자동 생성하고, 기존에 CLAUDE.md가 "@AGENTS.md" 한 줄만 있어서 Write tool에서 "read first" 오류 발생. 파일을 먼저 Read 후 Write로 교체.
+
+**배포 현황**
+- GitHub: https://github.com/walktoblue/bless-my-baby
+- Supabase: zbxnadgqarloklefhrph (handong-donor-wall과 공유)
+- 라이브: 배포 전 (구현 완료 후 자동 배포됨)
